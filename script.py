@@ -16,14 +16,12 @@ def get_tor_session():
 def renew_connection():
     with Controller.from_port(port=9051) as c:
         c.authenticate(password="password")
-        # send NEWNYM signal to establish a new clean connection through the Tor network
         c.signal(Signal.NEWNYM)
         c.close()
 
 
 if __name__ == "__main__":
-    # url = "https://isu.ifmo.ru/"
-    url = "®"
+    url = "https://isu.ifmo.ru/"
     url_tg = 'https://api.telegram.org/bot' + '1332257997:AAG2loW8TZJ37mjfyuqK57XFbnwaNGcaJAY' + '/sendMessage'
     flag = False
     ua = UserAgent()
@@ -54,24 +52,12 @@ if __name__ == "__main__":
         if 0 < status < 400:
             print("GOOD")
             count = 0
-            count2 = 0
-            # if (flag):
-            #     good_count += 1
-            # if flag and good_count > 2:
             if flag:
-                print("оруоруору")
                 flag = False
-                for i in (1, 20):
-                    requests.get(url_tg + '?chat_id=211463351&text= ИСУ (возможно) ОЖИЛ СЕГОДНЯ')
-                    playsound("02582.mp3")
-                # time.sleep(300)
-
-                # requests.get(url_tg + '?chat_id=-1001399796511&text= ИСУ (возможно) ОЖИЛ СЕГОДНЯ')
+                requests.get(url_tg + '?chat_id=211463351&text= ИСУ (возможно) ОЖИЛ СЕГОДНЯ')
         else:
             print("BAD, response: ", status)
             if status >= 400:
-                if not flag:
-                    good_count = 0
                 count2 += 1
 
         print("Waiting for ", hold, "s")
